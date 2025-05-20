@@ -7,11 +7,14 @@ var sparkles = 120;
  *  http://www.mf2fm.com/rv  *
  * DON'T EDIT BELOW THIS BOX *
  ****************************/
-var x = (ox = 400);
-var y = (oy = 300);
+var x = 400;
+var ox = 400;
+var y = 300;
+var oy = 300;
 var swide = 800;
 var shigh = 600;
-var sleft = (sdown = 0);
+var sleft = 0;
+var sdown = 0;
 var tiny = new Array();
 var star = new Array();
 var starv = new Array();
