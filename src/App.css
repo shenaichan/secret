@@ -5,7 +5,7 @@ body {
 main {
   height: 100dvh;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 300px 1fr 1fr;
 }
 
 .readerContainer {
@@ -42,9 +42,35 @@ main {
   margin-left: 1em;
 }
 
+#sidebar {
+  /* height: min-content; */
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* border: 1px solid black; */
+}
+
 #title {
   font-weight: normal;
   font-style: italic;
+}
+
+#infoPopup {
+  position: fixed;
+  background-color: var(--reader-bg-color);
+  border: 1px solid black;
+  top: 50dvh;
+  left: 50dvw;
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  box-shadow: 10px 10px #c1c1c1;
+}
+
+#infoPopup p,
+ol {
+  margin-bottom: 1em;
 }
 
 :root {
