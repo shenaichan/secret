@@ -3,6 +3,7 @@ import "./App.css";
 import Content from "./posts/example.mdx";
 import Post from "./posts/jordan-baker.mdx";
 import Reading from "./posts/reading.mdx";
+import classNames from "classnames";
 
 function Info({
   setDisplayInfo,
@@ -44,26 +45,12 @@ function App() {
       {displayInfo && <Info setDisplayInfo={setDisplayInfo} />}
       <div id="all">
         <div id="sidebar">
-          {/* <br /> */}
           <h1 id="title">secret@shenaichan ⋆.˚ ☾ .⭒˚ </h1>
-
-          {/* <br /> */}
-
           <p className="buttonText" onClick={() => setDisplayInfo(true)}>
             what is this?
           </p>
         </div>
-        {/* <main> */}
-        {/* <div className="readerContainer">
-          <p>by me</p> */}
-        <div className="reader" style={{ gridColumn: "2" }}>
-          <div className="post">
-            <div className="time">
-              <p>2025.05.20</p>
-              <p>00:34</p>
-            </div>
-            <Content />
-          </div>
+        <div id="left" className="reader">
           <div className="post">
             <div className="time">
               <p>2025.05.20</p>
@@ -79,12 +66,16 @@ function App() {
             <Reading />
           </div>
         </div>
-        {/* </div> */}
-        {/* <div className="readerContainer">
-          <p>by others</p> */}
-        <div className="reader" style={{ gridColumn: "3" }}></div>
-        {/* </div> */}
-        {/* </main> */}
+
+        <div id="right" className="reader">
+          <div className="post">
+            <div className="time">
+              <p>2025.05.20</p>
+              <p>00:34</p>
+            </div>
+            <Content />
+          </div>
+        </div>
       </div>
     </>
   );
