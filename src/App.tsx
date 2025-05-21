@@ -42,47 +42,50 @@ function App() {
   return (
     <>
       {displayInfo && <Info setDisplayInfo={setDisplayInfo} />}
-      <main>
+      <div id="all">
         <div id="sidebar">
-          <br />
-          <h1 id="title">secret@shenaichan</h1>
-          <h1> ⋆.˚ ☾ .⭒˚ </h1>
+          {/* <br /> */}
+          <h1 id="title">secret@shenaichan ⋆.˚ ☾ .⭒˚ </h1>
 
-          <br />
+          {/* <br /> */}
 
-          <button onClick={() => setDisplayInfo(true)}>what is this?</button>
+          <p className="buttonText" onClick={() => setDisplayInfo(true)}>
+            what is this?
+          </p>
         </div>
-        <div className="readerContainer">
-          <p>by me</p>
-          <div className="reader">
-            <div className="post">
-              <div className="time">
-                <p>2025.05.20</p>
-                <p>00:34</p>
-              </div>
-              <Content />
+        {/* <main> */}
+        {/* <div className="readerContainer">
+          <p>by me</p> */}
+        <div className="reader" style={{ gridColumn: "2" }}>
+          <div className="post">
+            <div className="time">
+              <p>2025.05.20</p>
+              <p>00:34</p>
             </div>
-            <div className="post">
-              <div className="time">
-                <p>2025.05.20</p>
-                <p>00:34</p>
-              </div>
-              <Post />
+            <Content />
+          </div>
+          <div className="post">
+            <div className="time">
+              <p>2025.05.20</p>
+              <p>00:34</p>
             </div>
-            <div className="post">
-              <div className="time">
-                <p>2025.05.20</p>
-                <p>00:34</p>
-              </div>
-              <Reading />
+            <Post />
+          </div>
+          <div className="post">
+            <div className="time">
+              <p>2025.05.20</p>
+              <p>00:34</p>
             </div>
+            <Reading />
           </div>
         </div>
-        <div className="readerContainer">
-          <p>by others</p>
-          <div className="reader"></div>
-        </div>
-      </main>
+        {/* </div> */}
+        {/* <div className="readerContainer">
+          <p>by others</p> */}
+        <div className="reader" style={{ gridColumn: "3" }}></div>
+        {/* </div> */}
+        {/* </main> */}
+      </div>
     </>
   );
 }
