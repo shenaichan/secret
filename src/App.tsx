@@ -33,7 +33,13 @@ function Info({
         spent a lot of time on tumblr growing up :)
       </p>
       <p>thank you for coming and enjoy your stay xoxoxo {"<3"}</p>
-      <button onClick={() => setDisplayInfo(false)}>close</button>
+      <p
+        style={{ marginBottom: "0" }}
+        className={classNames("buttonText", "invertButtonText")}
+        onClick={() => setDisplayInfo(false)}
+      >
+        close
+      </p>
     </div>
   );
 }
@@ -43,7 +49,6 @@ function App() {
   const [showReading, setShowReading] = useState(true);
   return (
     <>
-      {displayInfo && <Info setDisplayInfo={setDisplayInfo} />}
       <div id="all">
         <div id="sidebar">
           <h1 id="title">secret@shenaichan ⋆.˚ ☾ .⭒˚ </h1>
@@ -93,6 +98,7 @@ function App() {
           </div>
         </div>
       </div>
+      {displayInfo && <Info setDisplayInfo={setDisplayInfo} />}
     </>
   );
 }
