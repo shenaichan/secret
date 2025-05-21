@@ -27,6 +27,13 @@ export type Channel = {
   id: number;
   base_class: string;
   class: string;
+  position: number;
+  selected: boolean;
+  connection_id: number;
+  connected_at: Date;
+  connected_by_user_id: number;
+  connected_by_username: string;
+  connected_by_user_slug: string;
 };
 
 export type Contents = {

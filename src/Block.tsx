@@ -1,7 +1,5 @@
 import type { Content, Channel } from "./types";
 
-import "./App.css";
-
 import classNames from "classnames";
 
 function isChannel(obj: any): obj is Channel {
@@ -13,13 +11,6 @@ function isChannel(obj: any): obj is Channel {
 }
 
 function Block({ content }: { content: Content | Channel }) {
-  // some MVP block versions
-  // image
-  // text
-  // "link" --> anything that feels kind of like a URL snapshot
-  // wait i found the field lol
-  // class = "Image" | "Text" | "Link"
-
   const body = () => {
     if (isChannel(content)) {
       return (

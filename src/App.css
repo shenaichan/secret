@@ -26,11 +26,18 @@ body {
   grid-column: 3;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 20px 10px;
+}
+
+#arenaNextContainer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  height: min-content;
 }
 
 .block {
-  height: 300px;
+  height: min-content;
   overflow: hidden;
 }
 
@@ -126,9 +133,13 @@ body {
   overflow: scroll;
 }
 
-#infoPopup p,
-ol {
+#infoPopup p {
   margin-bottom: 1em;
+}
+
+#infoPopup ol {
+  margin-bottom: 1em;
+  padding-left: 30px;
 }
 
 :root {
@@ -177,11 +188,5 @@ img:hover {
 
   .invisible {
     visibility: hidden;
-  }
-}
-
-@media (max-width: 450px) {
-  .block {
-    height: 250px;
   }
 }
