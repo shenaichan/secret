@@ -40,17 +40,30 @@ function Info({
 
 function App() {
   const [displayInfo, setDisplayInfo] = useState(false);
+  const [showReading, setShowReading] = useState(true);
   return (
     <>
       {displayInfo && <Info setDisplayInfo={setDisplayInfo} />}
       <div id="all">
         <div id="sidebar">
           <h1 id="title">secret@shenaichan ⋆.˚ ☾ .⭒˚ </h1>
-          <p className="buttonText" onClick={() => setDisplayInfo(true)}>
-            what is this?
-          </p>
+          <div id="options">
+            <p className="buttonText" onClick={() => setDisplayInfo(true)}>
+              what is this?
+            </p>
+            <p
+              id="readWriteToggle"
+              className="buttonText"
+              onClick={() => setShowReading(!showReading)}
+            >
+              show {showReading ? "reading" : "writing"}
+            </p>
+          </div>
         </div>
-        <div id="left" className="reader">
+        <div
+          id="left"
+          className={classNames({ invisible: !showReading }, "reader")}
+        >
           <div className="post">
             <div className="time">
               <p>2025.05.20</p>
@@ -67,7 +80,10 @@ function App() {
           </div>
         </div>
 
-        <div id="right" className="reader">
+        <div
+          id="right"
+          className={classNames({ invisible: showReading }, "reader")}
+        >
           <div className="post">
             <div className="time">
               <p>2025.05.20</p>

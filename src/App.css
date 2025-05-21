@@ -68,6 +68,7 @@ body {
 #title {
   font-weight: normal;
   font-style: italic;
+  font-size: 28px;
 }
 
 #infoPopup {
@@ -95,18 +96,37 @@ ol {
   --dark-gray: #c1c1c1;
 }
 
+.invisible {
+  visibility: visible;
+}
+
+#readWriteToggle {
+  display: none;
+}
+
+#options {
+  display: flex;
+  justify-content: space-between;
+}
+
 @media (max-width: 700px) {
+  #readWriteToggle {
+    display: block;
+  }
+
   #left {
     grid-column: 2 / 4;
-    visibility: hidden;
   }
 
   #right {
     grid-column: 2 / 4;
-    /* visibility: hidden; */
   }
 
   .reader {
     position: relative;
+  }
+
+  .invisible {
+    visibility: hidden;
   }
 }
