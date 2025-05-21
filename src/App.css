@@ -26,11 +26,11 @@ body {
   grid-column: 3;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-auto-rows: 300px;
   gap: 10px;
 }
 
 .block {
+  height: 300px;
   overflow: hidden;
 }
 
@@ -177,5 +177,11 @@ img:hover {
 
   .invisible {
     visibility: hidden;
+  }
+}
+
+@media (max-width: 450px) {
+  .block {
+    height: 250px;
   }
 }
