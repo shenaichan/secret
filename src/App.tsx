@@ -1,31 +1,17 @@
 import { useState, useEffect, type FC } from "react";
+import Block from "./Block";
+import Info from "./Info";
+
 import "./App.css";
 import classNames from "classnames";
 
 import type { Contents, Content, Channel } from "./types";
 
-import Block from "./Block";
-import Info from "./Info";
-
 type Posts = Record<string, { default: FC }>;
-
 const postFiles = import.meta.glob("./posts/*.mdx", { eager: true }) as Posts;
 import postTimes from "./postslist.json";
 
-const PAGE_LENGTH = 20;
-
-const fmtDate = (date: Date) => {
-  const year = date.getFullYear().toString();
-  const month = date.getMonth().toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
-  return [year, month, day].join(".");
-};
-
-const fmtTime = (date: Date) => {
-  const hours = date.getHours().toString().padStart(2, "0");
-  const minutes = date.getMinutes().toString().padStart(2, "0");
-  return [hours, minutes].join(":");
-};
+import { fmtDate, fmtTime } from "./utils";
 
 function App() {
   const [displayInfo, setDisplayInfo] = useState(false);
@@ -39,7 +25,7 @@ function App() {
     setLoading(true);
     const url = `https://api.are.na/v2/channels/thought-nzylye7xtr4/contents`;
     try {
-      const currPage = Math.floor(blocks.length / PAGE_LENGTH) + 1;
+      const currPage = Math.floor(blocks.length / 20) + 1;
       const response = await fetch(
         `${url}?sort=position&direction=desc&page=${currPage}`
       );
