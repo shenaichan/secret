@@ -90,6 +90,11 @@ body {
   margin-left: 1em;
 }
 
+.post ul,
+ol {
+  padding-left: 30px;
+}
+
 .buttonText {
   font-style: italic;
   text-decoration: underline;
