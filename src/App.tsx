@@ -1,8 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type FC } from "react";
 import "./App.css";
-// import Content from "./posts/example.mdx";
-import Post from "./posts/jordan-baker.mdx";
-import Reading from "./posts/reading.mdx";
 import classNames from "classnames";
 
 import type { Contents, Content, Channel } from "./types";
@@ -10,7 +7,25 @@ import type { Contents, Content, Channel } from "./types";
 import Block from "./Block";
 import Info from "./Info";
 
+type Posts = Record<string, { default: FC }>;
+
+const postFiles = import.meta.glob("./posts/*.mdx", { eager: true }) as Posts;
+import postTimes from "./postslist.json";
+
 const PAGE_LENGTH = 20;
+
+const fmtDate = (date: Date) => {
+  const year = date.getFullYear().toString();
+  const month = date.getMonth().toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  return [year, month, day].join(".");
+};
+
+const fmtTime = (date: Date) => {
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  return [hours, minutes].join(":");
+};
 
 function App() {
   const [displayInfo, setDisplayInfo] = useState(false);
@@ -72,20 +87,22 @@ function App() {
           id="left"
           className={classNames({ invisible: !showReading }, "reader")}
         >
-          <div className="post">
-            <div className="time">
-              <p>2025.05.20</p>
-              <p>00:34</p>
-            </div>
-            <Post />
-          </div>
-          <div className="post">
-            <div className="time">
-              <p>2025.05.20</p>
-              <p>00:34</p>
-            </div>
-            <Reading />
-          </div>
+          {postTimes.map(([title, time], idx) => {
+            const path = `./posts/${title}.mdx`;
+            if (!(path in postFiles)) return;
+
+            const Post = postFiles[path].default;
+            const date = new Date(time);
+            return (
+              <div className="post" key={idx}>
+                <div className="time">
+                  <p>{fmtDate(date)}</p>
+                  <p>{fmtTime(date)}</p>
+                </div>
+                <Post />
+              </div>
+            );
+          })}
         </div>
 
         <div
