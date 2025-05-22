@@ -16,7 +16,7 @@ body {
   background-color: var(--reader-bg-color);
   padding: 20px;
   margin-bottom: 10px;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 #left {
