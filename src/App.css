@@ -28,6 +28,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px 10px;
+  grid-auto-rows: max-content;
 }
 
 #arenaNextContainer {
@@ -38,7 +39,6 @@ body {
 }
 
 .block {
-  height: min-content;
   overflow: hidden;
 }
 
