@@ -103,6 +103,10 @@ ol {
   padding-left: 20px;
 }
 
+.poem p {
+  margin-bottom: 0;
+}
+
 .buttonText {
   font-style: italic;
   text-decoration: underline;
