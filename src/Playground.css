@@ -1,0 +1,7 @@
+#board {
+  grid-column: 2 / -2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px 10px;
+  grid-auto-rows: max-content;
+}
