@@ -1,4 +1,4 @@
-import { useState, useEffect, type FC } from "react";
+import { useState, useEffect } from "react";
 import Block from "./Block";
 import Info from "./Info";
 
@@ -8,22 +8,22 @@ import classNames from "classnames";
 
 import type { Contents, Content, Channel } from "./types";
 
-type Posts = Record<string, { default: FC }>;
-const postFiles = import.meta.glob("./posts/*.mdx", { eager: true }) as Posts;
-import postTimes from "./postslist.json";
+// type Posts = Record<string, { default: FC }>;
+// const postFiles = import.meta.glob("./posts/*.mdx", { eager: true }) as Posts;
+// import postTimes from "./postslist.json";
 
-import { fmtDate, fmtTime } from "./utils";
+// import { fmtDate, fmtTime } from "./utils";
 
 function Playground() {
   const [displayInfo, setDisplayInfo] = useState(false);
   const [showReading, setShowReading] = useState(true);
   const [blocks, setBlocks] = useState<(Content | Channel)[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [arenaFinished, setArenaFinished] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  // const [arenaFinished, setArenaFinished] = useState(false);
 
   const getNextPage = async () => {
-    if (arenaFinished) return;
-    setLoading(true);
+    // if (arenaFinished) return;
+    // setLoading(true);
     const url = `https://api.are.na/v2/channels/thought-nzylye7xtr4/contents`;
     try {
       let page = 1;
@@ -49,7 +49,7 @@ function Playground() {
         throw err;
       }
     }
-    setLoading(false);
+    // setLoading(false);
   };
 
   useEffect(() => {
