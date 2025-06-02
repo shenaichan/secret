@@ -149,7 +149,7 @@ ol {
   top: 50dvh;
   left: 50dvw;
   transform: translate(-50%, -50%);
-  padding: 50px;
+  padding: 30px;
   box-shadow: 5px 5px var(--dark-gray);
   max-height: 500px;
   min-width: 300px;
@@ -160,7 +160,7 @@ ol {
   margin-bottom: 1em;
 }
 
-#infoPopup ol {
+#infoPopup ol, ul {
   margin-bottom: 1em;
   padding-left: 30px;
 }
