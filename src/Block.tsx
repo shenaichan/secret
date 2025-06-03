@@ -2,7 +2,7 @@ import type { Content, Channel } from "./types";
 
 import classNames from "classnames";
 
-function isChannel(obj: any): obj is Channel {
+export function isChannel(obj: any): obj is Channel {
   return (
     typeof obj === "object" &&
     obj !== null &&

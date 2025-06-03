@@ -4,9 +4,10 @@ import Info from "./Info";
 
 import "./App.css";
 import "./Playground.css";
-import classNames from "classnames";
+// import classNames from "classnames";
 
 import type { Contents, Content, Channel } from "./types";
+import { isChannel } from "./Block";
 
 // type Posts = Record<string, { default: FC }>;
 // const postFiles = import.meta.glob("./posts/*.mdx", { eager: true }) as Posts;
@@ -14,10 +15,18 @@ import type { Contents, Content, Channel } from "./types";
 
 // import { fmtDate, fmtTime } from "./utils";
 
+type SearchState = "empty" | "searching" | "found";
+
 function Playground() {
   const [displayInfo, setDisplayInfo] = useState(false);
-  const [showReading, setShowReading] = useState(true);
+  // const [showReading, setShowReading] = useState(true);
   const [blocks, setBlocks] = useState<(Content | Channel)[]>([]);
+  const [matchingBlocks, setMatchingBlocks] = useState<(Content | Channel)[]>(
+    []
+  );
+  const [currInput, setCurrInput] = useState("");
+  const [timeoutId, setTimeoutId] = useState(-1);
+  const [searching, setSearching] = useState<SearchState>("empty");
   // const [loading, setLoading] = useState(false);
   // const [arenaFinished, setArenaFinished] = useState(false);
 
@@ -40,6 +49,7 @@ function Playground() {
         finalPage = json.contents.some((elt) => elt.position === 1);
         // setArenaFinished(finalPage);
         setBlocks((blocks) => [...blocks, ...json.contents]);
+        setMatchingBlocks((blocks) => [...blocks, ...json.contents]);
         page++;
       }
     } catch (err) {
@@ -56,11 +66,62 @@ function Playground() {
     getNextPage();
   }, []);
 
+  useEffect(() => {
+    let ignore = false;
+
+    clearTimeout(timeoutId);
+
+    if (currInput.trim()) {
+      setSearching("searching");
+      const tid = setTimeout(() => {
+        // console.log("finally stopped typing");
+
+        const search = (q: string) => {
+          q = q.toLowerCase();
+          const newMatchingBlocks = blocks.filter((elt) => {
+            if (isChannel(elt)) {
+              return elt.title.toLowerCase().includes(q);
+            }
+
+            return (
+              elt.title.toLowerCase().includes(q) ||
+              elt.description?.toLowerCase().includes(q) ||
+              elt.content?.toLowerCase().includes(q) ||
+              elt.source?.url.toLowerCase().includes(q) ||
+              elt.source?.title?.toLowerCase().includes(q)
+            );
+          });
+          if (!ignore) {
+            setMatchingBlocks(newMatchingBlocks);
+            setSearching("found");
+          }
+        };
+
+        search(currInput.trim());
+      }, 300);
+      setTimeoutId(tid);
+    } else {
+      setSearching("empty");
+      setMatchingBlocks(blocks);
+    }
+
+    return () => {
+      ignore = true;
+    };
+  }, [currInput]);
+
   return (
     <>
       <div id="all">
         <div id="sidebar">
-          <h1 id="title">secret@shenaichan ⋆.˚ ☾ .⭒˚ </h1>
+          <input
+            placeholder="search for block..."
+            value={currInput}
+            onChange={(e) => {
+              setCurrInput(e.target.value);
+            }}
+          />
+          {/* <h1 id="title">secret@shenaichan ⋆.˚ ☾ .⭒˚ </h1>
           <div id="options">
             <p className="buttonText" onClick={() => setDisplayInfo(true)}>
               what is this?
@@ -72,7 +133,7 @@ function Playground() {
             >
               show {showReading ? "reading" : "writing"}
             </p>
-          </div>
+          </div> */}
         </div>
         {/* <div
           id="left"
@@ -96,13 +157,13 @@ function Playground() {
           })}
         </div> */}
 
-        <div
-          id="board"
-          className={classNames({ invisible: showReading }, "reader")}
-        >
-          {blocks.map((elt) => (
+        <div id="board" className="reader">
+          {matchingBlocks.map((elt) => (
             <Block key={elt.id} content={elt} />
           ))}
+          {searching === "found" && matchingBlocks.length === 0 && (
+            <p style={{ gridColumn: "1 / -1" }}>Sorry, no blocks found :(</p>
+          )}
           {/* {!arenaFinished && (
             <div id="arenaNextContainer">
               <button onClick={() => getNextPage()} disabled={loading}>
