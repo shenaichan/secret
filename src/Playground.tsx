@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Block from "./Block";
 import Info from "./Info";
 
@@ -27,6 +27,8 @@ function Playground() {
   const [currInput, setCurrInput] = useState("");
   const [timeoutId, setTimeoutId] = useState(-1);
   const [searching, setSearching] = useState<SearchState>("empty");
+
+  const inputRef = useRef<HTMLInputElement>(null);
   // const [loading, setLoading] = useState(false);
   // const [arenaFinished, setArenaFinished] = useState(false);
 
@@ -63,7 +65,39 @@ function Playground() {
   };
 
   useEffect(() => {
+    const handleInputJump = (e: KeyboardEvent) => {
+      if (
+        e.key === "/" &&
+        inputRef.current &&
+        !(
+          // if we're not currently highlighting an input box
+          (
+            document.activeElement &&
+            ["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)
+          )
+        )
+      ) {
+        e.preventDefault();
+        inputRef.current?.focus();
+      } else if (
+        e.key === "Escape" &&
+        inputRef.current &&
+        inputRef.current === document.activeElement
+      ) {
+        inputRef.current.blur();
+      }
+    };
+
+    window.addEventListener("keydown", handleInputJump);
+
     getNextPage();
+
+    return () => {
+      window.removeEventListener("keydown", handleInputJump);
+      // setBlocks([]);
+      // setMatchingBlocks([]);
+      // setSearching("empty");
+    };
   }, []);
 
   useEffect(() => {
@@ -104,7 +138,6 @@ function Playground() {
       setSearching("empty");
       setMatchingBlocks(blocks);
     }
-
     return () => {
       ignore = true;
     };
@@ -116,6 +149,7 @@ function Playground() {
         <div id="searchwrapper">
           <input
             id="search"
+            ref={inputRef}
             placeholder="search for block..."
             value={currInput}
             onChange={(e) => {
