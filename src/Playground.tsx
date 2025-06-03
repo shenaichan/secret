@@ -113,15 +113,17 @@ function Playground() {
   return (
     <>
       <div id="all">
-        <div id="sidebar">
+        <div id="searchwrapper">
           <input
+            id="search"
             placeholder="search for block..."
             value={currInput}
             onChange={(e) => {
               setCurrInput(e.target.value);
             }}
           />
-          {/* <h1 id="title">secret@shenaichan ⋆.˚ ☾ .⭒˚ </h1>
+        </div>
+        {/* <h1 id="title">secret@shenaichan ⋆.˚ ☾ .⭒˚ </h1>
           <div id="options">
             <p className="buttonText" onClick={() => setDisplayInfo(true)}>
               what is this?
@@ -134,7 +136,6 @@ function Playground() {
               show {showReading ? "reading" : "writing"}
             </p>
           </div> */}
-        </div>
         {/* <div
           id="left"
           className={classNames({ invisible: !showReading }, "reader")}

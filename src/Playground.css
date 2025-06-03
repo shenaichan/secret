@@ -5,3 +5,21 @@
   gap: 20px 10px;
   grid-auto-rows: max-content;
 }
+
+#searchwrapper {
+  grid-column: 2 / -2;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+#search {
+  width: 450px;
+  padding: 5px;
+  border: 1px solid var(--black);
+  border-radius: 4px;
+}
+
+#search::placeholder {
+  font-style: italic;
+}
